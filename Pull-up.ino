@@ -5,7 +5,8 @@ Input Pullup Serial
  digital input on pin 2 and prints the results to the serial monitor.
  
  The circuit: 
- * Momentary switch attached from pin 2 to ground 
+ * Hall effect sensor attached from pin 8 to ground
+ * LED on pin 9
  * Built-in LED on pin 13
  
  Unlike pinMode(INPUT), there is no pull-down resistor necessary. An internal 
@@ -14,6 +15,8 @@ Input Pullup Serial
  
  created 14 March 2012
  by Scott Fitzgerald
+ edited 26 JUN 2019
+ by Ernie Bose
  
  http://www.arduino.cc/en/Tutorial/InputPullupSerial
  
@@ -25,13 +28,14 @@ void setup(){
   //start serial connection
   Serial.begin(9600);
   //configure pin2 as an input and enable the internal pull-up resistor
-  pinMode(2, INPUT_PULLUP);
+  pinMode(8, INPUT_PULLUP);
+  pinMode(9, OUTPUT);
   pinMode(13, OUTPUT); 
 
 }
 
 void loop(){
-  //read the pushbutton value into a variable
+  //read the halleffect sensor value into a variable
   int sensorVal = digitalRead(2);
   //print out the value of the pushbutton
   Serial.println(sensorVal);
@@ -42,10 +46,13 @@ void loop(){
   // button's pressed, and off when it's not:
   if (sensorVal == HIGH) {
     digitalWrite(13, LOW);
+    digitalWrite(9, LOW);
+    
   } 
   else {
     digitalWrite(13, HIGH);
-  }
+    digitalWrite(9, HIGH);
+  } 
 }
 
 
